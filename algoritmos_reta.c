@@ -12,9 +12,9 @@
 #define Pixelx 800
 #define Pixely 600
 
-float x1=0,y1=0,x2=100000,y2=100000;
 
-float TempoInicio, TempoFinal, Tempo;
+
+
 
 
 void eq_reta(){
@@ -22,8 +22,11 @@ void eq_reta(){
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
     glColor3f(1.0,1.0,1.0);
 
-    int x,y, xx, yy;
-    int dx = x2-x1, Reta;
+    int x,y;
+    float TempoInicio, TempoFinal, Reta;
+
+    float x1=0,y1=0,x2=100000,y2=100000;
+    int dx = x2-x1;
 
     float m = (y2-y1)/(x2-x1);
 
@@ -36,6 +39,7 @@ void eq_reta(){
         y = (m*(x2 - x1)) - y1;
 
         if(x >= 0 && y>=0){
+                printf("%d, %d\n",x,y );
             glVertex2f(x,y);
         }
 
@@ -55,7 +59,8 @@ void brenseham(){
     glClearColor(0.0,0.0,0.0,0.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
     glColor3f(1.0,1.0,0.0);
-    float Bres;
+
+    float TempoInicio, TempoFinal, Bres;
     int x,y;
     int x1 = 0, y1 = 0, x2 = 100000, y2 = 100000; //pontos inicial e final
 
@@ -100,7 +105,7 @@ void DDA(){
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
     glColor3f(1.0,0.0,0.0);
 
-    float DDA;
+    float TempoInicio, TempoFinal, DDA;
     int x,y;
     int x1 = 0, y1 = 0, x2 = 100000, y2 = 100000; //pontos inicial e final
 
