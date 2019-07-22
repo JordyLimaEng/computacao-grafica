@@ -7,25 +7,28 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include <windows.h>
 
 #define Pixelx 800
 #define Pixely 600
 
 
-
-
-
-
 void eq_reta(){
-    glClearColor(0.0,0.0,0.0,0.0);
+    glClearColor(0.0,0.0,0.0,1.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluOrtho2D(0.0,50.0,0.0,50.0);
+
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+
     glColor3f(1.0,1.0,1.0);
 
     int x,y;
     float TempoInicio, TempoFinal, Reta;
 
-    float x1=0,y1=0,x2=100000,y2=100000;
+    float x1=0,y1=0,x2=50,y2=50;
     int dx = x2-x1;
 
     float m = (y2-y1)/(x2-x1);
@@ -39,7 +42,6 @@ void eq_reta(){
         y = (m*(x2 - x1)) - y1;
 
         if(x >= 0 && y>=0){
-                printf("%d, %d\n",x,y );
             glVertex2f(x,y);
         }
 
@@ -56,8 +58,16 @@ void eq_reta(){
 }
 
 void brenseham(){
-    glClearColor(0.0,0.0,0.0,0.0);
+    glClearColor(0.0,0.0,0.0,1.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluOrtho2D(0.0,50.0,0.0,50.0);
+
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+
     glColor3f(1.0,1.0,0.0);
 
     float TempoInicio, TempoFinal, Bres;
@@ -101,8 +111,16 @@ void brenseham(){
 }
 
 void DDA(){
-    glClearColor(0.0,0.0,0.0,0.0);
+    glClearColor(0.0,0.0,0.0,1.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluOrtho2D(0.0,50.0,0.0,50.0);
+
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+
     glColor3f(1.0,0.0,0.0);
 
     float TempoInicio, TempoFinal, DDA;
@@ -153,15 +171,12 @@ int main(int argc, char *argv[]){
     glutInitDisplayMode(GLUT_RGB | GLUT_SINGLE );//Define modo de exibição
 
     glutCreateWindow("Eq_reta");//Título da janela
-    gluOrtho2D(0.0,50.0,0.0,50.0);
     glutDisplayFunc(eq_reta);//Processamento da Cena
 
     glutCreateWindow("breseham");//Título da janela
-    gluOrtho2D(0.0,50.0,0.0,50.0);
     glutDisplayFunc(brenseham);//Processamento da Cena
 
     glutCreateWindow("DDA");//Título da janela
-    gluOrtho2D(0.0,50.0,0.0,50.0);
     glutDisplayFunc(DDA);//Processamento da Cena
 
     glutMainLoop();// laço gráfico
