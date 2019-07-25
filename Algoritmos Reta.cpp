@@ -4,6 +4,8 @@
 #include <GL/glut.h>
 #endif
 
+#define VEZES 100000
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -24,9 +26,12 @@ void eq_reta(){
     glLoadIdentity();
 
     glColor3f(1.0,1.0,1.0);
+    float TempoInicio, TempoFinal, Reta;
+    TempoInicio = GetTickCount(); //inicia contagem
+    for (int a = 0; a<VEZES; a++){
 
     int x,y;
-    float TempoInicio, TempoFinal, Reta;
+
 
     float x1=0,y1=0,x2=50,y2=50;
     int dx = x2-x1;
@@ -34,7 +39,6 @@ void eq_reta(){
     float m = (y2-y1)/(x2-x1);
 
     glBegin(GL_POINTS);
-    TempoInicio = GetTickCount(); //inicia contagem
 
     //Algoritmo da eq reta
     for(int i=x1; i<x2; i++){
@@ -47,8 +51,10 @@ void eq_reta(){
 
         x1++;
         y1++;
-    }
+     }
 
+
+    }
     TempoFinal = GetTickCount();
     Reta = TempoFinal - TempoInicio;
     printf("Tempo Algoritmo Eq Reta - %.6f s\n", Reta/1000);
@@ -71,6 +77,10 @@ void brenseham(){
     glColor3f(1.0,1.0,0.0);
 
     float TempoInicio, TempoFinal, Bres;
+    TempoInicio = GetTickCount(); //inicia contagem
+    for (int a = 0; a<VEZES; a++){
+
+
     int x,y;
     int x1 = 0, y1 = 0, x2 = 100000, y2 = 100000; //pontos inicial e final
 
@@ -78,7 +88,7 @@ void brenseham(){
     int dy = abs(y2 - y1);
     int p = 2 * (dy - dx);
 
-    TempoInicio = GetTickCount(); //inicia contagem
+
     if(x1>x2){
         x = x2;
         y = y2;
@@ -103,6 +113,7 @@ void brenseham(){
     }
     TempoFinal = GetTickCount();
 
+    }
     Bres = TempoFinal - TempoInicio;
     printf("Tempo Algoritmo BRESEHAM - %.6f s\n", Bres/1000);
     glEnd();
@@ -124,10 +135,14 @@ void DDA(){
     glColor3f(1.0,0.0,0.0);
 
     float TempoInicio, TempoFinal, DDA;
+    TempoInicio = GetTickCount(); //inicia contagem
+    for (int a = 0; a<VEZES; a++){
+
+
     int x,y;
     int x1 = 0, y1 = 0, x2 = 100000, y2 = 100000; //pontos inicial e final
 
-    TempoInicio = GetTickCount(); //inicia contagem
+
     int dx = abs(x2 - x1);
     int dy = abs(y2 - y1);
 
@@ -152,6 +167,7 @@ void DDA(){
 
         glVertex2f(x1,y1);
     }
+    }
 
     TempoFinal = GetTickCount();
 
@@ -160,6 +176,8 @@ void DDA(){
     glEnd();
     glFlush();
     glutSwapBuffers();
+
+
 }
 
 
@@ -169,6 +187,7 @@ int main(int argc, char *argv[]){
     glutInitWindowSize(Pixelx, Pixely);//Tamanho da janela na área do monitor
     glutInitWindowPosition(10,10);//Posição da janela no monitor
     glutInitDisplayMode(GLUT_RGB | GLUT_SINGLE );//Define modo de exibição
+
 
     glutCreateWindow("Eq_reta");//Título da janela
     glutDisplayFunc(eq_reta);//Processamento da Cena
